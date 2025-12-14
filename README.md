@@ -1,73 +1,89 @@
-# Welcome to your Lovable project
+# Sweet Shop Management System
 
-## Project info
+A full-stack application to manage a sweet shop efficiently. This system handles inventory, sales, customers, and order tracking.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Features
 
-## How can I edit this code?
+- Add, update, and delete sweets and other products
+- Manage customer details
+- Track sales and orders
+- Generate reports for stock and sales
 
-There are several ways of editing your application.
+## Technology Stack
 
-**Use Lovable**
+- Backend: Node.js/Express, Django  
+- Frontend: React, Angular, HTML/CSS  
+- Database: MySQL, MongoDB  
+- Version Control: Git & GitHub  
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
 
-Changes made via Lovable will be committed automatically to this repo.
+## Installation
 
-**Use your preferred IDE**
+1. **Clone the repository**
+```bash
+git clone https://github.com/Ananya142/SweetShop_Management-System.git
+````
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+2. **Go to the project folder**
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+cd SweetShop_Management-System
 ```
 
-**Edit a file directly in GitHub**
+3. **Install backend dependencies** (example for Node.js)
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+```bash
+cd backend
+npm install
+```
 
-**Use GitHub Codespaces**
+4. **Install frontend dependencies** (example for React)
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+```bash
+cd ../frontend
+npm install
+```
 
-## What technologies are used for this project?
+5. **Start the backend server**
 
-This project is built with:
+```bash
+cd ../backend
+npm start
+```
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+6. **Start the frontend application**
 
-## How can I deploy this project?
+```bash
+cd ../frontend
+npm start
+```
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+7. **Access the app**
+   Open your browser and go to:
 
-## Can I connect a custom domain to my Lovable project?
+```
+http://localhost:3000
+```
 
-Yes, you can!
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+
+## Usage
+
+- Open the app in your browser  
+- Use the admin panel to manage products and orders  
+- Track inventory and sales reports  
+
+## Contributing
+
+1. Fork the repository  
+2. Create a new branch: git checkout -b feature-name  
+3. Make your changes and commit: git commit -m "Add feature"  
+4. Push to the branch: git push origin feature-name  
+5. Create a Pull Request  
+
+## License
+
+This project is licensed under the MIT License.
+
+
