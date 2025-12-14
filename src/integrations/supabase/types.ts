@@ -81,9 +81,11 @@ export type Database = {
           delivery_address: string | null
           delivery_city: string | null
           delivery_phone: string | null
+          estimated_delivery: string | null
           id: string
           purchased_at: string
           quantity: number
+          status: Database["public"]["Enums"]["order_status"]
           sweet_id: string
           total_price: number
           user_id: string
@@ -92,9 +94,11 @@ export type Database = {
           delivery_address?: string | null
           delivery_city?: string | null
           delivery_phone?: string | null
+          estimated_delivery?: string | null
           id?: string
           purchased_at?: string
           quantity: number
+          status?: Database["public"]["Enums"]["order_status"]
           sweet_id: string
           total_price: number
           user_id: string
@@ -103,9 +107,11 @@ export type Database = {
           delivery_address?: string | null
           delivery_city?: string | null
           delivery_phone?: string | null
+          estimated_delivery?: string | null
           id?: string
           purchased_at?: string
           quantity?: number
+          status?: Database["public"]["Enums"]["order_status"]
           sweet_id?: string
           total_price?: number
           user_id?: string
@@ -167,6 +173,13 @@ export type Database = {
       is_admin: { Args: { user_id: string }; Returns: boolean }
     }
     Enums: {
+      order_status:
+        | "pending"
+        | "confirmed"
+        | "preparing"
+        | "shipped"
+        | "delivered"
+        | "cancelled"
       user_role: "user" | "admin"
     }
     CompositeTypes: {
@@ -295,6 +308,14 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      order_status: [
+        "pending",
+        "confirmed",
+        "preparing",
+        "shipped",
+        "delivered",
+        "cancelled",
+      ],
       user_role: ["user", "admin"],
     },
   },
