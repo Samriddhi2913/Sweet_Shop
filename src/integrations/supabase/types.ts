@@ -78,6 +78,9 @@ export type Database = {
       }
       purchases: {
         Row: {
+          delivery_address: string | null
+          delivery_city: string | null
+          delivery_phone: string | null
           id: string
           purchased_at: string
           quantity: number
@@ -86,6 +89,9 @@ export type Database = {
           user_id: string
         }
         Insert: {
+          delivery_address?: string | null
+          delivery_city?: string | null
+          delivery_phone?: string | null
           id?: string
           purchased_at?: string
           quantity: number
@@ -94,6 +100,9 @@ export type Database = {
           user_id: string
         }
         Update: {
+          delivery_address?: string | null
+          delivery_city?: string | null
+          delivery_phone?: string | null
           id?: string
           purchased_at?: string
           quantity?: number

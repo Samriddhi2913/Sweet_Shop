@@ -17,6 +17,12 @@ interface CartItem {
   };
 }
 
+interface DeliveryAddress {
+  address: string;
+  city: string;
+  phone: string;
+}
+
 interface CartContextType {
   items: CartItem[];
   itemCount: number;
@@ -26,7 +32,7 @@ interface CartContextType {
   updateQuantity: (cartItemId: string, quantity: number) => Promise<void>;
   removeFromCart: (cartItemId: string) => Promise<void>;
   clearCart: () => Promise<void>;
-  checkout: () => Promise<boolean>;
+  checkout: (deliveryAddress: DeliveryAddress) => Promise<boolean>;
   refreshCart: () => Promise<void>;
 }
 
@@ -187,7 +193,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
     }
   };
 
-  const checkout = async (): Promise<boolean> => {
+  const checkout = async (deliveryAddress: DeliveryAddress): Promise<boolean> => {
     if (!user || items.length === 0) return false;
 
     try {
@@ -211,6 +217,9 @@ export function CartProvider({ children }: { children: ReactNode }) {
           user_id: user.id,
           quantity: item.quantity,
           total_price: Number(item.sweets.price) * item.quantity,
+          delivery_address: deliveryAddress.address,
+          delivery_city: deliveryAddress.city,
+          delivery_phone: deliveryAddress.phone,
         });
 
         if (purchaseError) throw purchaseError;

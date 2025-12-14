@@ -6,12 +6,17 @@ import Header from '@/components/Header';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Candy, ShoppingCart, Minus, Plus, Trash2, ArrowLeft, Banknote } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Candy, ShoppingCart, Minus, Plus, Trash2, ArrowLeft, Banknote, MapPin, Phone } from 'lucide-react';
 
 const Cart = () => {
   const { user, isLoading: authLoading } = useAuth();
   const { items, itemCount, totalPrice, isLoading, updateQuantity, removeFromCart, checkout, refreshCart } = useCart();
   const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const [address, setAddress] = useState('');
+  const [city, setCity] = useState('');
+  const [phone, setPhone] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -20,9 +25,13 @@ const Cart = () => {
     }
   }, [user, authLoading, navigate]);
 
+  const isAddressValid = address.trim().length > 0 && city.trim().length > 0 && phone.trim().length > 0;
+
   const handleCheckout = async () => {
+    if (!isAddressValid) return;
+    
     setIsCheckingOut(true);
-    const success = await checkout();
+    const success = await checkout({ address, city, phone });
     setIsCheckingOut(false);
     
     if (success) {
@@ -160,8 +169,52 @@ const Cart = () => {
               })}
             </div>
 
-            {/* Order Summary */}
-            <div className="lg:col-span-1">
+            {/* Order Summary & Address */}
+            <div className="lg:col-span-1 space-y-4">
+              {/* Delivery Address */}
+              <Card className="shadow-card border-0">
+                <CardHeader>
+                  <CardTitle className="font-display flex items-center gap-2">
+                    <MapPin className="w-5 h-5 text-primary" />
+                    Delivery Address
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="address">Street Address</Label>
+                    <Input
+                      id="address"
+                      placeholder="Enter your street address"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="city">City</Label>
+                    <Input
+                      id="city"
+                      placeholder="Enter your city"
+                      value={city}
+                      onChange={(e) => setCity(e.target.value)}
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="phone" className="flex items-center gap-1">
+                      <Phone className="w-3 h-3" />
+                      Phone Number
+                    </Label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      placeholder="Enter your phone number"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                    />
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Order Summary */}
               <Card className="shadow-card border-0 sticky top-24">
                 <CardHeader>
                   <CardTitle className="font-display">Order Summary</CardTitle>
@@ -194,11 +247,16 @@ const Cart = () => {
                     className="w-full"
                     size="lg"
                     onClick={handleCheckout}
-                    disabled={isCheckingOut || items.some(i => i.quantity > i.sweets.quantity)}
+                    disabled={isCheckingOut || !isAddressValid || items.some(i => i.quantity > i.sweets.quantity)}
                   >
                     <Banknote className="w-4 h-4 mr-2" />
                     {isCheckingOut ? 'Processing...' : 'Place Order (COD)'}
                   </Button>
+                  {!isAddressValid && items.length > 0 && (
+                    <p className="text-xs text-muted-foreground text-center">
+                      Please fill in all delivery details
+                    </p>
+                  )}
                 </CardFooter>
               </Card>
             </div>
