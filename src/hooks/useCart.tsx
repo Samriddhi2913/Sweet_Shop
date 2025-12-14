@@ -229,7 +229,7 @@ export function CartProvider({ children }: { children: ReactNode }) {
 
       toast({
         title: 'Order placed!',
-        description: `Successfully purchased ${items.length} item(s) for $${totalPrice.toFixed(2)}`,
+        description: `Successfully ordered ${items.length} item(s) for $${totalPrice.toFixed(2)}. Pay on delivery.`,
       });
 
       return true;

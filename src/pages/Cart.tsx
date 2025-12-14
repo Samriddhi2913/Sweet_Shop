@@ -6,7 +6,7 @@ import Header from '@/components/Header';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Candy, ShoppingCart, Minus, Plus, Trash2, ArrowLeft, CreditCard } from 'lucide-react';
+import { Candy, ShoppingCart, Minus, Plus, Trash2, ArrowLeft, Banknote } from 'lucide-react';
 
 const Cart = () => {
   const { user, isLoading: authLoading } = useAuth();
@@ -181,7 +181,14 @@ const Cart = () => {
                     <span className="text-primary">${totalPrice.toFixed(2)}</span>
                   </div>
                 </CardContent>
-                <CardFooter>
+                <CardFooter className="flex-col gap-3">
+                  <div className="w-full flex items-center gap-2 p-3 bg-secondary/50 rounded-lg">
+                    <Banknote className="w-5 h-5 text-primary" />
+                    <div>
+                      <p className="text-sm font-medium">Cash on Delivery</p>
+                      <p className="text-xs text-muted-foreground">Pay when your order arrives</p>
+                    </div>
+                  </div>
                   <Button
                     variant="candy"
                     className="w-full"
@@ -189,8 +196,8 @@ const Cart = () => {
                     onClick={handleCheckout}
                     disabled={isCheckingOut || items.some(i => i.quantity > i.sweets.quantity)}
                   >
-                    <CreditCard className="w-4 h-4 mr-2" />
-                    {isCheckingOut ? 'Processing...' : 'Checkout'}
+                    <Banknote className="w-4 h-4 mr-2" />
+                    {isCheckingOut ? 'Processing...' : 'Place Order (COD)'}
                   </Button>
                 </CardFooter>
               </Card>
